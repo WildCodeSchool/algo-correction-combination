@@ -1,18 +1,15 @@
 export const combine = (char: string, chars: string[], length: number): string[] => {
 
-    let result = [char]
+    const result2 = chars.reduce<string []>(
+        (acc, value) => {
+            const code = char + value
+            return length > 2 ? [...acc, ...combine(code, chars, length-1)] 
+            : [...acc, code]
+        },
+        [char]
+    )
 
-    for(let i = 0; i < chars.length; i++) {
-        let code = char + chars[i]
-
-        if(length > 2) {
-            result = [...result, ...combine(code, chars, length-1)]
-        } else {
-            result.push(code)
-        }
-    }
-
-    return result
+    return result2
 }
 
 
